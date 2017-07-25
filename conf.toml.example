@@ -1,0 +1,9 @@
+[telegram]
+token = "..."
+name = "..."
+username = "my_bot"
+url = "t.me/my_bot"
+myID = 12345678
+
+[jrnl]
+path = "/my/Dropbox/notes/jrnl/"
