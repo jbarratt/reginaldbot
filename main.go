@@ -42,14 +42,17 @@ func main() {
 			bot.SendMessage(message.Chat, "I'm sorry, I'm a private bot.", nil)
 			continue
 		}
-		if strings.HasPrefix(message.Text, "/jrnl ") {
-			entry := strings.TrimPrefix(message.Text, "/jrnl ")
-			err := jrnlEntry(entry, jrnlPath)
+		parts := strings.SplitN(message.Text, " ", 2)
+		cmd := parts[0]
+		body := parts[1]
+
+		if cmd == "/jrnl" || cmd == "/j" {
+			err := jrnlEntry(body, jrnlPath)
 			if err != nil {
 				log.Printf("Error saving journal: %v", err)
 				bot.SendMessage(message.Chat, "unable to save, sorry.", nil)
 			} else {
-				bot.SendMessage(message.Chat, "saved that to your journal 👍", nil)
+				bot.SendMessage(message.Chat, "Saved", nil)
 			}
 			continue
 		}

@@ -13,10 +13,11 @@ Things I think might be fun to add long term:
 
 ## Task List
 
-* Create a basic conf file
-* Start with a basic todo writer in Go
-* Once that's working, get a bot token, and put that in the conf file
-* Wire up the bot and find how my user id appears
-* respond snarkily to other users
-* implement the next feature that seems fun
+* factor jrnl responder out as separate goroutine
+* make it work with minimal unique prefixes for commands, e.g. '/j' works for '/jrnl'
+* factor jrnl out to a separate go package w/ cli
+* figure out prometheus alerting webhook endpoint
+* convert to binary build and properly install/run on system
+* build taskpaper package to include as well
+
 
