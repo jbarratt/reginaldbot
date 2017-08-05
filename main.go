@@ -8,6 +8,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/kyokomi/emoji"
 	"github.com/pelletier/go-toml"
 	"github.com/tucnak/telebot"
 )
@@ -25,6 +26,7 @@ func main() {
 
 	botToken := conf.Get("telegram.token").(string)
 	myID := int(conf.Get("telegram.myID").(int64))
+	myUser := telebot.User{ID: myID}
 	if err != nil {
 		log.Fatalln(err)
 	}
@@ -36,6 +38,8 @@ func main() {
 
 	messages := make(chan telebot.Message, 100)
 	bot.Listen(messages, 1*time.Second)
+
+	bot.SendMessage(myUser, emoji.Sprint("ReginaldBot at your service :tophat:"), nil)
 
 	for message := range messages {
 		if message.Sender.ID != myID {
@@ -52,7 +56,7 @@ func main() {
 				log.Printf("Error saving journal: %v", err)
 				bot.SendMessage(message.Chat, "unable to save, sorry.", nil)
 			} else {
-				bot.SendMessage(message.Chat, "Saved", nil)
+				bot.SendMessage(message.Chat, emoji.Sprint("Saved :+1:"), nil)
 			}
 			continue
 		}
